@@ -45,6 +45,15 @@ public class PlayerMovement : MonoBehaviour
         {
             currentSpeed = 0f;
         }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            rb.AddForce(new Vector3(0, -0.75f * startingSpeed, 0));
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(new Vector3(0, 0.75f * startingSpeed, 0));
+        }
     }
 
     private void CheckMovement(KeyCode keyCode, ref Vector3 deltaPosition, Vector3 directionVector)
