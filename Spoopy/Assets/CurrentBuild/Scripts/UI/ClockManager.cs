@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 
 public class ClockManager : MonoBehaviour
@@ -29,7 +30,7 @@ public class ClockManager : MonoBehaviour
             if (timerSec <= 0) { timerMin--; timerSec = 60; }   
            if(timerMin < 0)
             {
-            Application.LoadLevel("GameOver");
+            SceneManager.LoadScene("GameOver");
 
         }
             hours.localRotation   = Quaternion.Euler(0f, 0f, (float)(timerMinRound - 6) * (360f / 12f));
