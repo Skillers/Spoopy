@@ -21,7 +21,7 @@ public class Fearing : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 
         foreach (GameObject interaction in interactions)

@@ -35,6 +35,14 @@ public class Button : MonoBehaviour {
         {
             Application.LoadLevel("Marc");
         }
+        else if (gameObject.name == "Restart Text")
+        {
+            Application.LoadLevel("Level1");
+        }
+        else if (gameObject.name == "Quit Text")
+        {
+            Application.Quit();
+        }
 
     }
 }
