@@ -5,17 +5,13 @@ using System.Linq;
 
 public class residentMovement : MonoBehaviour {
 
-    [HideInInspector] public GameObject[] currentRoomWPs;
-    [HideInInspector] public string currentRoom;
-    [HideInInspector] public string targetRoom;
-    
     /* 
     Add the names of all rooms the resident can roam into roomNames string array.
     Omit rooms the character does NOT roam in.
     A room name can be entered multiple times to make the resident more likely to roam there (a favorited room).
     Each room name must have corresponding Waypoints (empty game objects) with "roomName"+"WP" (example "KitchenWP"). CASE SENSITIVE!!
     */
-    public string[] roomNames = new string[] { "Kitchen", "Lobby"  };
+    public string[] roomNames = new string[] { "Kitchen", "DiningRoom", "LivingRoom", "1fHall", "MasterBedroom", "Office", "Bathroom", "Toilet", "SouthBedroom", "NorthBedroom" };
 
     //agent determines destination, speed, stopping distance etc.
     [HideInInspector]public NavMeshAgent agent;
@@ -26,22 +22,38 @@ public class residentMovement : MonoBehaviour {
     private float searchTimer = 0;
 
     // for room alocation
-    public float newRoomInterval = 10f; // change to move between rooms faster
+    public float newRoomInterval = 5; // change to move between rooms faster
     private float newRoomCount = 0f;
 
     public string currentState;
-    public string startingRoom = "Lobby";
+    public string startingRoom = "Kitchen";
    
     Vector3 currentInvestigation;
 
+    //Actions variables
+    private float actionTimer = 0f;
+    private float trappedTimer = 0f;
+    private float scareTimer = 0f;
 
+    // Room assignment variables
+    [HideInInspector]
+    public GameObject[] currentRoomWPs;
+    [HideInInspector]
+    public string currentRoom;
+    [HideInInspector]
+    public string targetRoom;
+    [HideInInspector]
+    public GameObject targetWaypoint;
 
     void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
 
-        targetRoom = startingRoom;
-        currentRoom = "frambozenthee"; // random value making sure start is not the same
+        currentRoom = startingRoom;
+        targetRoom = currentRoom;
+        currentRoomWPs = GameObject.FindGameObjectsWithTag(startingRoom + "WP");
+
+        SetNewDestination();
 
         // resident will start in roaming state. 
         currentState = "roaming";
@@ -52,8 +64,7 @@ public class residentMovement : MonoBehaviour {
 	void Update () {
         if (currentState == "roaming")
         {
-            roaming();
-            randomRoom();
+            Roaming();
         }
         if(currentState == "investigate")
         {
@@ -63,33 +74,26 @@ public class residentMovement : MonoBehaviour {
     }
 
 
-
-    public void roaming()
+    public void Roaming()
     {
         currentState = "roaming";
-        // first check if the room has changed, if so load Waypoints to the array.
         if (targetRoom != currentRoom)
         {
             currentRoomWPs = GameObject.FindGameObjectsWithTag(targetRoom + "WP");
             currentRoom = targetRoom;
         }
         
-        
-        Vector3 roamTarget;
-        Vector3 oldTarget = new Vector3(10000,0,0); // random value to make sure the start is never the same
-
-        // when the resident gets close to target WayPoint, a new random target that is NOT the same as previous will be chosen.
         if (agent.remainingDistance <= agent.stoppingDistance)
-        {      
-                roamTarget = currentRoomWPs[Random.Range(0, currentRoomWPs.Length)].transform.position;
-                if (agent.destination != oldTarget)
-                {
-                    agent.SetDestination(roamTarget);
-                    oldTarget = roamTarget;
-                } 
+        {
+            performAction(targetWaypoint.name);
         }
-    }
 
+        if(newRoomCount >= newRoomInterval)
+        {
+            NewRandomRoom();
+        }
+      
+    }
 
 
     //Resident moves to designated location, spins round for few seconds, then continues roaming
@@ -108,7 +112,7 @@ public class residentMovement : MonoBehaviour {
             if (searchTimer >= searchDuration)
             {
                currentState = "roaming";
-               roaming();
+               Roaming();
                 searchTimer = 0f;
             }
         }
@@ -133,15 +137,92 @@ public class residentMovement : MonoBehaviour {
     }
 
     // sets a new random room for roaming on a timed interval.
-    public void randomRoom()
+    public void NewRandomRoom()
     {
-        newRoomCount += Time.deltaTime;
-        if(newRoomCount >= newRoomInterval)
-        {
+            newRoomInterval = Random.Range(3, 10);
             targetRoom = roomNames[Random.Range(0, roomNames.Length)];
             newRoomCount = 0f;
+    }
+
+    public void SetNewDestination()
+    {
+        GameObject newTargetWaypoint = currentRoomWPs[Random.Range(0, currentRoomWPs.Length)];
+        if (newTargetWaypoint != targetWaypoint)
+        {
+            targetWaypoint = newTargetWaypoint;
+            Vector3 newTarget = targetWaypoint.transform.position;
+            agent.SetDestination(newTarget);
         }
 
+    }
 
+    public void performAction(string actionName)
+    {
+        switch (actionName)
+        {
+            case "Sink":
+                actionTimer += Time.deltaTime;
+                if (actionTimer >= 5)
+                {
+                    SetNewDestination();
+                    actionTimer = 0;
+                }
+                break;
+            case "Seat":
+                actionTimer += Time.deltaTime;
+                if (actionTimer >= 5)
+                {
+                    SetNewDestination();
+                    actionTimer = 0;
+                }
+                break;
+            default:
+                SetNewDestination();
+                break;
+
+
+        }
+
+        newRoomCount += 1;
+    }
+
+    public void FleeFromHouse()
+    {
+        currentState = "GTFO";
+        agent.SetDestination(new Vector3(0,0,-100));
+        agent.speed = 12;
+    }
+
+    public void FleeFromPoint(Vector3 scarePoint)
+    {
+        currentState = "flee";
+        scareTimer += Time.deltaTime;
+
+        float minDistance = 5;
+        float runSpeed = 6;
+
+        if (Vector3.Distance(scarePoint, this.transform.position) > minDistance)
+        {   
+            Vector3 direction = this.transform.position - scarePoint;
+            direction.Normalize();
+            this.transform.position = Vector3.MoveTowards(this.transform.position, direction * minDistance, Time.deltaTime * runSpeed);
+        }
+
+        if (scareTimer > 5)
+        {
+            currentState = "roaming";
+            scareTimer = 0;
+        }
+    }
+
+
+    public void Trapped()
+    {
+        currentState = "trapped";
+        trappedTimer += Time.deltaTime;
+        if(trappedTimer > 10)
+        {
+            currentState = "roaming";
+        }
     }
 }
