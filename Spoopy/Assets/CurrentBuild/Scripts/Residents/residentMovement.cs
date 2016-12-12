@@ -11,7 +11,7 @@ public class residentMovement : MonoBehaviour {
     A room name can be entered multiple times to make the resident more likely to roam there (a favorited room).
     Each room name must have corresponding Waypoints (empty game objects) with "roomName"+"WP" (example "KitchenWP"). CASE SENSITIVE!!
     */
-    public string[] roomNames = new string[] { "Kitchen", "DiningRoom", "LivingRoom", "1fHall", "MasterBedroom", "Office", "Bathroom", "Toilet", "SouthBedroom", "NorthBedroom" };
+    public string[] roomNames = new string[] { "Kitchen", "DiningRoom", "LivingRoom", "MasterBedroom", "Office", "Bathroom", "Toilet", "SouthBedroom", "NorthBedroom", "Ensuite", "Library" };
 
     //agent determines destination, speed, stopping distance etc.
     [HideInInspector]public NavMeshAgent agent;
@@ -35,6 +35,10 @@ public class residentMovement : MonoBehaviour {
     private float trappedTimer = 0f;
     private float scareTimer = 0f;
 
+    // Scare From Player
+    public GameObject residentSanctuary;
+    public GameObject ghost;
+
     // Room assignment variables
     [HideInInspector]
     public GameObject[] currentRoomWPs;
@@ -52,7 +56,6 @@ public class residentMovement : MonoBehaviour {
         currentRoom = startingRoom;
         targetRoom = currentRoom;
         currentRoomWPs = GameObject.FindGameObjectsWithTag(startingRoom + "WP");
-
         SetNewDestination();
 
         // resident will start in roaming state. 
@@ -71,6 +74,11 @@ public class residentMovement : MonoBehaviour {
             investigate(currentInvestigation);
         }
 
+
+        if (currentState == "scared")
+        {
+            FleeToSanctuary();
+        }
     }
 
 
@@ -176,6 +184,30 @@ public class residentMovement : MonoBehaviour {
                     actionTimer = 0;
                 }
                 break;
+            case "Inspect":
+                actionTimer += Time.deltaTime;
+                if (actionTimer >= 5)
+                {
+                    SetNewDestination();
+                    actionTimer = 0;
+                }
+                break;
+            case "Countertop":
+                actionTimer += Time.deltaTime;
+                if (actionTimer >= 5)
+                {
+                    SetNewDestination();
+                    actionTimer = 0;
+                }
+                break;
+            case "Toilet":
+                actionTimer += Time.deltaTime;
+                if (actionTimer >= 15)
+                {
+                    SetNewDestination();
+                    actionTimer = 0;
+                }
+                break;
             default:
                 SetNewDestination();
                 break;
@@ -193,6 +225,7 @@ public class residentMovement : MonoBehaviour {
         agent.speed = 12;
     }
 
+    /*
     public void FleeFromPoint(Vector3 scarePoint)
     {
         currentState = "flee";
@@ -214,7 +247,22 @@ public class residentMovement : MonoBehaviour {
             scareTimer = 0;
         }
     }
+    */
 
+    public void FleeToSanctuary()
+    {
+        currentState = "scared";
+        agent.destination = residentSanctuary.transform.position;
+        agent.speed = 10;
+        scareTimer += Time.deltaTime;
+        if(scareTimer > 15)
+        {
+            currentState = "roaming";
+            agent.speed = 6;
+            scareTimer = 0;
+        }
+
+    }
 
     public void Trapped()
     {
