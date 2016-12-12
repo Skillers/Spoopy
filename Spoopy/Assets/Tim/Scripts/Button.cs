@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Button : MonoBehaviour {
     public Color highlightColor;
@@ -26,7 +27,7 @@ public class Button : MonoBehaviour {
     public void Click()
     {
         if (gameObject.name == "Retry Text") {
-            Application.LoadLevel("Level1");
+            SceneManager.LoadScene("Level1");
         }
         else if (gameObject.name == "Exit Text") {
             Application.LoadLevel("Marc");
