@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/CurrentBuild/Scenes/Level1/Level1.unity
+- path: Assets/Itamar/Scenes/Level1/Level1.unity
   isLoaded: 1
   isActive: 1
