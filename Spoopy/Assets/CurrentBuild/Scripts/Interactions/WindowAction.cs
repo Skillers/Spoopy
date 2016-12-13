@@ -11,6 +11,7 @@ public class WindowAction : MonoBehaviour
     public AudioSource audio;
     public AudioClip window;
     public bool activated = false, turning = false, ready = true, AI_Hit = false;
+    Transform child;
     
 
     [SerializeField]
@@ -55,6 +56,7 @@ public class WindowAction : MonoBehaviour
     void Start()
     {
         AI_Time = AI_TimeAmount;
+        child = transform.FindChild("Window");
     }
 
     // Update is called once per frame
@@ -106,4 +108,17 @@ public class WindowAction : MonoBehaviour
         return num % 2 == 0;
     }
 
+    void FixedUpdate()
+    {
+        if (activated == true)
+        {
+            //child.Rotate(0, 1, 0);
+            //activated = false;
+        }
+
+        if (child.localRotation.y > 0.7)
+        {
+            child.localEulerAngles = new Vector3(child.localEulerAngles.x, 90f, child.localEulerAngles.z);
+        }
+    }
 }
