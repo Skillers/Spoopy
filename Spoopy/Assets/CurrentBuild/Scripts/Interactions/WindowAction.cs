@@ -7,7 +7,7 @@ public class WindowAction : MonoBehaviour
     // Use this for initialization
     public float Rotation = 90;
     public int RepeatAmount = 11;
-    public float RotationSpeed = 2.0f, AI_TimeAmount = 2.0f;
+    public float RotationSpeed = 2.0f, AI_TimeAmount = 12.0f;
     public AudioSource audio;
     public AudioClip window;
     public bool activated = false, turning = false, ready = true, AI_Hit = false;
@@ -25,11 +25,14 @@ public class WindowAction : MonoBehaviour
     private float AI_Time;
     private bool AI_Timer = false;
 
+    [SerializeField]
+    private AreaTaunt _areaTaunt;
+
+
     public IEnumerator timer()
     {
         if (ready)
         {
-            ready = false;
             BaseRotation = this.transform.rotation.eulerAngles;
 
             for (int i = 0; i < RepeatAmount; i++)
@@ -42,7 +45,8 @@ public class WindowAction : MonoBehaviour
                 yield return new WaitForSeconds(RotateTime);
             }
 
-
+            ready = false;
+            _areaTaunt.TauntReady = true;
             turning = false;
             RotateAmount = 0;
         }

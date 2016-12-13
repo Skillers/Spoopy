@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/CurrentBuild/Scenes/EasyLevel/EasyLevel.unity
-=======
-- path: Assets/Itamar/Scenes/Level1/Level1.unity
->>>>>>> origin/Itamar
   isLoaded: 1
   isActive: 1

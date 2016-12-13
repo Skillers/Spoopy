@@ -74,7 +74,10 @@ public class BookCaseScript : MonoBehaviour {
             GameObject bookz = (GameObject)Instantiate(book);
             //spawn each book at the right position and angle in the bookcase
             bookz.transform.position = Spawns[i].transform.position;
-            bookz.transform.rotation = this.transform.rotation; 
+            bookz.transform.rotation = this.transform.rotation;
+            bookz.transform.parent = Spawns[i].transform;
+
+            Debug.Log(bookz.transform.position);
             Books.Add(bookz);
             
         }

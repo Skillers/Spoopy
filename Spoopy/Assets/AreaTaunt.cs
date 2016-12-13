@@ -9,14 +9,40 @@ public class AreaTaunt : MonoBehaviour {
     
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Resident")
+        if (col.gameObject.tag == "Resident")
         {
             if (TauntReady)
             {
-                if(callBack != null)
+                if (col.GetComponent<residentMovement>() != null)
                 {
-                    col.GetComponent<TauntAI>().TriggerInvestigate(this.transform.position, callBack);
-                } 
+                    if (col.GetComponent<residentMovement>().currentState != "investigate")
+                    {
+                        if (callBack != null)
+                        {
+                            col.GetComponent<TauntAI>().TriggerInvestigate(this.transform.position, callBack);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.tag == "Resident")
+        {
+            if (TauntReady)
+            {
+                if (col.GetComponent<residentMovement>() != null)
+                {
+                    if (col.GetComponent<residentMovement>().currentState != "investigate")
+                    {
+                        if (callBack != null)
+                        {
+                            col.GetComponent<TauntAI>().TriggerInvestigate(this.transform.position, callBack);
+                        }
+                    }
+                }
             }
         }
     }
