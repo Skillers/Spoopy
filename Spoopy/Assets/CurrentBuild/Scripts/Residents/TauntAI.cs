@@ -3,9 +3,8 @@ using System.Collections;
 
 public class TauntAI : MonoBehaviour {
 
-	public void TriggerInvestigate(Vector3 target)
+	public void TriggerInvestigate(Vector3 target, System.Action callBack)
     {
-
-        GetComponent<residentMovement>().investigate(target);
+        GetComponent<residentMovement>().investigate(target, callBack);
     }
 }

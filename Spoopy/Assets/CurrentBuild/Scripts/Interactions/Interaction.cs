@@ -16,7 +16,7 @@ public class Interaction : MonoBehaviour {
         {
             if (Vector3.Distance(this.transform.position, TAI.transform.position) <= 40.0f)
             {
-                TAI.TriggerInvestigate(this.transform.position);
+                TAI.TriggerInvestigate(this.transform.position, () => { });
             }
         }
     }
@@ -72,8 +72,7 @@ public class Interaction : MonoBehaviour {
 
     public void WindowInteraction()
     {
-        this.GetComponentInParent<WindowAction>().activated = true;
-        Taunt();
+        this.GetComponent<HandleWindow>().ExecuteWindow();
     }
 
     public void DoorBellInteraction()

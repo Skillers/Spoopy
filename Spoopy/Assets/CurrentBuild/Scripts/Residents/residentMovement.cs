@@ -29,6 +29,7 @@ public class residentMovement : MonoBehaviour {
     public string startingRoom = "Kitchen";
    
     Vector3 currentInvestigation;
+    System.Action currentCallBack;
 
     //Actions variables
     private float actionTimer = 0f;
@@ -71,7 +72,7 @@ public class residentMovement : MonoBehaviour {
         }
         if(currentState == "investigate")
         {
-            investigate(currentInvestigation);
+            investigate(currentInvestigation, currentCallBack);
         }
 
 
@@ -105,13 +106,20 @@ public class residentMovement : MonoBehaviour {
 
 
     //Resident moves to designated location, spins round for few seconds, then continues roaming
-    public void investigate(Vector3 targetPosition)
+    public void investigate(Vector3 targetPosition, System.Action callBack)
     {
         currentInvestigation = targetPosition;
+        currentCallBack = callBack;
         currentState = "investigate";
-        ResetWindowInteraction();
 
         agent.SetDestination(targetPosition);
+
+        if (agent.remainingDistance <= 5)
+        {
+            Debug.Log(callBack.Method.Name);
+            callBack();
+        }
+
         if(agent.remainingDistance <= agent.stoppingDistance)
         {
             this.transform.Rotate(0, searchingTurnSpeed * Time.deltaTime ,0);
@@ -126,18 +134,7 @@ public class residentMovement : MonoBehaviour {
         }
     }
 
-    private void ResetWindowInteraction()
-    {
-        List<WindowAction> windows = GameObject.FindObjectsOfType<WindowAction>().ToList<WindowAction>();
-        foreach (WindowAction WA in windows)
-        {
-            Debug.Log(agent.stoppingDistance);
-            if (Vector3.Distance(this.transform.position, WA.transform.position) <= 5)
-            {
-                WA.AI_Hit = true;
-            }
-        }
-    }
+    
 
     public void goToTarget(Vector3 targetPosition)
     {
