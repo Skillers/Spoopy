@@ -27,7 +27,7 @@ public class Button : MonoBehaviour {
     public void Click()
     {
         if (gameObject.name == "Retry Text") {
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene("EasyLevel");
         }
         else if (gameObject.name == "Exit Text") {
             Application.LoadLevel("Marc");
@@ -38,7 +38,7 @@ public class Button : MonoBehaviour {
         }
         else if (gameObject.name == "Restart Text")
         {
-            Application.LoadLevel("Level1");
+            Application.LoadLevel("EasyLevel");
         }
         else if (gameObject.name == "Quit Text")
         {
