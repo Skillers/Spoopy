@@ -14,11 +14,6 @@ public class HeaderScript : MonoBehaviour {
 
     void Update ()
     {
-        if (Input.anyKey)
-        {
-            Application.Quit();
-        }
-
         timer -= Time.deltaTime;
         scaling(0.1f, 5);
         if(timer >= 0)

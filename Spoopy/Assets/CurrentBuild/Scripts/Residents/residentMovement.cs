@@ -5,6 +5,13 @@ using System.Linq;
 
 public class residentMovement : MonoBehaviour {
 
+<<<<<<< HEAD
+=======
+    [HideInInspector] public GameObject[] currentRoomWPs;
+    public string currentRoom;
+    public string targetRoom;
+    
+>>>>>>> master
     /* 
     Add the names of all rooms the resident can roam into roomNames string array.
     Omit rooms the character does NOT roam in.
@@ -18,7 +25,7 @@ public class residentMovement : MonoBehaviour {
     
     // used for the investigation method
     float searchingTurnSpeed = 120f;
-    private float searchDuration = 4f; // time spend searching location before returning to roaming state.
+    private float searchDuration = 3f; // time spend searching location before returning to roaming state.
     private float searchTimer = 0;
 
     // for room alocation
@@ -134,7 +141,22 @@ public class residentMovement : MonoBehaviour {
         }
     }
 
+<<<<<<< HEAD
     
+=======
+    private void ResetWindowInteraction()
+    {
+        List<WindowAction> windows = GameObject.FindObjectsOfType<WindowAction>().ToList<WindowAction>();
+        foreach (WindowAction WA in windows)
+        {
+            
+            if (Vector3.Distance(this.transform.position, WA.transform.position) <= 5)
+            {
+                WA.AI_Hit = true;
+            }
+        }
+    }
+>>>>>>> master
 
     public void goToTarget(Vector3 targetPosition)
     {

@@ -8,7 +8,7 @@ public class CreditScript : MonoBehaviour {
 
     public void LoadScene(string name)
     {
-        SceneManager.LoadScene(name);
+        Application.LoadLevel(name);
     }
 
     void Update ()
@@ -19,20 +19,17 @@ public class CreditScript : MonoBehaviour {
         
         if(timer <= 0)
         {
-            Debug.Log("aids");
             this.transform.Translate(0, 0.03f, 0);
         }
         if(quitTimer <= 0)
         {
             LoadScene("Marc");
         }
-        if (ExitTimer <= 0)
+        if (Input.anyKey)
         {
-            if (Input.anyKey)
-            {
-                LoadScene("Marc");
-            }
+           LoadScene("Marc");
         }
+        
 
     }
 }

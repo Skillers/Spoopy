@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ClockManager : MonoBehaviour
 {
+    public GameObject timeWarning;
+    public Text timeWarningNumber;
+
 
     private float
         hoursToDegrees= 360f / 12f,
@@ -29,12 +33,23 @@ public class ClockManager : MonoBehaviour
             if (timerSec <= 0) { timerMin--; timerSec = 60; }   
            if(timerMin < 0)
             {
-            Application.LoadLevel("GameOver");
+            SceneManager.LoadScene("GameOver");
 
         }
             hours.localRotation   = Quaternion.Euler(0f, 0f, (float)(timerMinRound - 6) * (360f / 12f));
             minutes.localRotation = Quaternion.Euler(0f, 0f, (float)timerSecRound * minutesToDegrees);
             seconds.localRotation = Quaternion.Euler(0f, 0f, (float)timerMilisecRound * -360);
+        if (timerSecRound > 57 && timerMin != 5)
+        {
+
+            timeWarningNumber.text = "" + (int)(timerMin + 1);
+            timeWarning.SetActive(true);
+           
+        }
+        else
+        {
+            timeWarning.SetActive(false);
+        }
 
     }
 }

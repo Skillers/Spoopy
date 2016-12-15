@@ -56,10 +56,11 @@ public class Interaction : MonoBehaviour {
 
     public void DoorInteraction()
     {
-        if (!this.transform.root.transform.GetChild(0).GetComponent<LockDoor>().locked)
+        Debug.Log(this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).name);
+        if (!this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().locked)
         {
-            this.transform.root.transform.GetChild(0).GetComponent<DoorScript>().open = !this.transform.root.transform.GetChild(0).GetComponent<DoorScript>().open;
-            this.transform.root.transform.GetChild(0).GetComponent<DoorScript>().squeek();
+            this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open = !this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open;
+            this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().squeek();
         }
     }
 
@@ -91,6 +92,6 @@ public class Interaction : MonoBehaviour {
     // locking doors
     public void DoorLock()
     {
-        this.transform.root.transform.GetChild(0).GetComponent<LockDoor>().activated = true;
+        this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().activated = true;
     }
 }
