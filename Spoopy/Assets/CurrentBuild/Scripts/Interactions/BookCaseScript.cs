@@ -69,7 +69,7 @@ public class BookCaseScript : MonoBehaviour {
 
     void HandleBookSpawn()
     {
-        for(int i = 0; i < Spawns.Count; i++)
+        /*for(int i = 0; i < Spawns.Count-1; i++)
         {
             GameObject bookz = (GameObject)Instantiate(book);
             //spawn each book at the right position and angle in the bookcase
@@ -77,10 +77,10 @@ public class BookCaseScript : MonoBehaviour {
             bookz.transform.rotation = this.transform.rotation;
             bookz.transform.parent = Spawns[i].transform;
 
-            Debug.Log(bookz.transform.position);
+            //Debug.Log(bookz.transform.position);
             Books.Add(bookz);
             
-        }
+        }*/
     }
 
     void BookReset()

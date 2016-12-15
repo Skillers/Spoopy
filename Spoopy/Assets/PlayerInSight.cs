@@ -3,15 +3,13 @@ using System.Collections;
 
 public class PlayerInSight : MonoBehaviour {
     public Fearing methodgetter;
-    public float distance;
-    public GameObject Direction;
     public GameObject player;
 
     bool cleansing;
     float timer;
 	// Use this for initialization
 	void Start () {
-	
+        timer = 3f;
 	}
 
     // Update is called once per frame
@@ -20,8 +18,10 @@ public class PlayerInSight : MonoBehaviour {
 
         if (cleansing) {
             timer -= Time.deltaTime;
-            if (this.gameObject.GetComponent<residentMovement>().currentState != "investigate") ;
-            this.gameObject.GetComponent<residentMovement>().investigate(this.transform.position);
+            if (this.gameObject.GetComponent<residentMovement>().currentState != "investigate")
+            {
+                this.gameObject.GetComponent<residentMovement>().investigate(this.transform.position, () => { });
+            }
         }
         else
         {

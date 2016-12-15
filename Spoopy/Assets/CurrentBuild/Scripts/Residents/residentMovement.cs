@@ -3,15 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class residentMovement : MonoBehaviour {
 
-<<<<<<< HEAD
-=======
-    [HideInInspector] public GameObject[] currentRoomWPs;
-    public string currentRoom;
-    public string targetRoom;
-    
->>>>>>> master
+public class residentMovement : MonoBehaviour
+{
+
+
     /* 
     Add the names of all rooms the resident can roam into roomNames string array.
     Omit rooms the character does NOT roam in.
@@ -20,32 +16,39 @@ public class residentMovement : MonoBehaviour {
     */
     public string[] roomNames = new string[] { "Kitchen", "DiningRoom", "LivingRoom", "MasterBedroom", "Office", "Bathroom", "Toilet", "SouthBedroom", "NorthBedroom", "Ensuite", "Library" };
 
+
     //agent determines destination, speed, stopping distance etc.
-    [HideInInspector]public NavMeshAgent agent;
-    
+    [HideInInspector]
+    public NavMeshAgent agent;
+
     // used for the investigation method
     float searchingTurnSpeed = 120f;
-    private float searchDuration = 3f; // time spend searching location before returning to roaming state.
+    private float searchDuration = 4f; // time spend searching location before returning to roaming state.
     private float searchTimer = 0;
+
 
     // for room alocation
     public float newRoomInterval = 5; // change to move between rooms faster
     private float newRoomCount = 0f;
 
+
     public string currentState;
     public string startingRoom = "Kitchen";
-   
+
     Vector3 currentInvestigation;
     System.Action currentCallBack;
+
 
     //Actions variables
     private float actionTimer = 0f;
     private float trappedTimer = 0f;
     private float scareTimer = 0f;
 
+
     // Scare From Player
     public GameObject residentSanctuary;
     public GameObject ghost;
+
 
     // Room assignment variables
     [HideInInspector]
@@ -57,30 +60,38 @@ public class residentMovement : MonoBehaviour {
     [HideInInspector]
     public GameObject targetWaypoint;
 
-    void Start ()
+
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
 
         currentRoom = startingRoom;
         targetRoom = currentRoom;
         currentRoomWPs = GameObject.FindGameObjectsWithTag(startingRoom + "WP");
         SetNewDestination();
 
+
         // resident will start in roaming state. 
         currentState = "roaming";
     }
-	
 
 
-	void Update () {
+
+
+
+    void Update()
+    {
         if (currentState == "roaming")
         {
             Roaming();
         }
-        if(currentState == "investigate")
+        if (currentState == "investigate")
         {
             investigate(currentInvestigation, currentCallBack);
         }
+
+
 
 
         if (currentState == "scared")
@@ -88,6 +99,8 @@ public class residentMovement : MonoBehaviour {
             FleeToSanctuary();
         }
     }
+
+
 
 
     public void Roaming()
@@ -98,18 +111,21 @@ public class residentMovement : MonoBehaviour {
             currentRoomWPs = GameObject.FindGameObjectsWithTag(targetRoom + "WP");
             currentRoom = targetRoom;
         }
-        
+
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             performAction(targetWaypoint.name);
         }
 
-        if(newRoomCount >= newRoomInterval)
+
+        if (newRoomCount >= newRoomInterval)
         {
             NewRandomRoom();
         }
-      
+
     }
+
+
 
 
     //Resident moves to designated location, spins round for few seconds, then continues roaming
@@ -119,7 +135,9 @@ public class residentMovement : MonoBehaviour {
         currentCallBack = callBack;
         currentState = "investigate";
 
+
         agent.SetDestination(targetPosition);
+
 
         if (agent.remainingDistance <= 5)
         {
@@ -127,49 +145,40 @@ public class residentMovement : MonoBehaviour {
             callBack();
         }
 
-        if(agent.remainingDistance <= agent.stoppingDistance)
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            this.transform.Rotate(0, searchingTurnSpeed * Time.deltaTime ,0);
+            this.transform.Rotate(0, searchingTurnSpeed * Time.deltaTime, 0);
             searchTimer += Time.deltaTime;
+
 
             if (searchTimer >= searchDuration)
             {
-               currentState = "roaming";
-               Roaming();
+                currentState = "roaming";
+                Roaming();
                 searchTimer = 0f;
             }
         }
     }
 
-<<<<<<< HEAD
-    
-=======
-    private void ResetWindowInteraction()
-    {
-        List<WindowAction> windows = GameObject.FindObjectsOfType<WindowAction>().ToList<WindowAction>();
-        foreach (WindowAction WA in windows)
-        {
-            
-            if (Vector3.Distance(this.transform.position, WA.transform.position) <= 5)
-            {
-                WA.AI_Hit = true;
-            }
-        }
-    }
->>>>>>> master
+
+
+
 
     public void goToTarget(Vector3 targetPosition)
     {
         agent.SetDestination(targetPosition);
     }
 
+
     // sets a new random room for roaming on a timed interval.
     public void NewRandomRoom()
     {
-            newRoomInterval = Random.Range(3, 10);
-            targetRoom = roomNames[Random.Range(0, roomNames.Length)];
-            newRoomCount = 0f;
+        newRoomInterval = Random.Range(3, 10);
+        targetRoom = roomNames[Random.Range(0, roomNames.Length)];
+        newRoomCount = 0f;
     }
+
 
     public void SetNewDestination()
     {
@@ -181,7 +190,9 @@ public class residentMovement : MonoBehaviour {
             agent.SetDestination(newTarget);
         }
 
+
     }
+
 
     public void performAction(string actionName)
     {
@@ -232,17 +243,22 @@ public class residentMovement : MonoBehaviour {
                 break;
 
 
+
+
         }
+
 
         newRoomCount += 1;
     }
 
+
     public void FleeFromHouse()
     {
         currentState = "GTFO";
-        agent.SetDestination(new Vector3(0,0,-100));
+        agent.SetDestination(new Vector3(0, 0, -100));
         agent.speed = 12;
     }
+
 
     /*
     public void FleeFromPoint(Vector3 scarePoint)
@@ -250,8 +266,10 @@ public class residentMovement : MonoBehaviour {
         currentState = "flee";
         scareTimer += Time.deltaTime;
 
+
         float minDistance = 5;
         float runSpeed = 6;
+
 
         if (Vector3.Distance(scarePoint, this.transform.position) > minDistance)
         {   
@@ -259,6 +277,7 @@ public class residentMovement : MonoBehaviour {
             direction.Normalize();
             this.transform.position = Vector3.MoveTowards(this.transform.position, direction * minDistance, Time.deltaTime * runSpeed);
         }
+
 
         if (scareTimer > 5)
         {
@@ -268,28 +287,35 @@ public class residentMovement : MonoBehaviour {
     }
     */
 
+
     public void FleeToSanctuary()
     {
         currentState = "scared";
         agent.destination = residentSanctuary.transform.position;
         agent.speed = 10;
         scareTimer += Time.deltaTime;
-        if(scareTimer > 15)
+        if (scareTimer > 15)
         {
             currentState = "roaming";
             agent.speed = 6;
             scareTimer = 0;
         }
 
+
     }
+
 
     public void Trapped()
     {
         currentState = "trapped";
         trappedTimer += Time.deltaTime;
-        if(trappedTimer > 10)
+        if (trappedTimer > 10)
         {
             currentState = "roaming";
         }
     }
 }
+
+
+
+

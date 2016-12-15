@@ -57,10 +57,21 @@ public class Interaction : MonoBehaviour {
     public void DoorInteraction()
     {
         Debug.Log(this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).name);
-        if (!this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().locked)
+        Debug.Log(this.transform.parent.transform.parent.transform.GetChild(0).name);
+        if (this.transform.parent.transform.parent.transform.GetChild(0).name != "SingleDoor") {
+            if (!this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().locked)
+            {
+                this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open = !this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open;
+                this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().squeek();
+            }
+        }
+        else
         {
-            this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open = !this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open;
-            this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().squeek();
+            if (!this.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().locked)
+            {
+                this.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open = !this.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open;
+                this.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().squeek();
+            }
         }
     }
 
