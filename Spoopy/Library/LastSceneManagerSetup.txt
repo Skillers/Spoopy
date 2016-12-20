@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/CurrentBuild/Scenes/EasyLevel/EasyLevel.unity
+- path: Assets/Tim/Scenes/TimTest.unity
   isLoaded: 1
   isActive: 1

@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
-    public float startingSpeed = 100f;
+    public float startingSpeed = 125f;
     public float increaseSpeed = 12.5f;
     private float bonusSpeed = 0f;
 
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = 0f;
         }
 
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             rb.AddForce(new Vector3(0, -0.75f * startingSpeed, 0));
         }
