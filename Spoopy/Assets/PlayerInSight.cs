@@ -6,7 +6,7 @@ public class PlayerInSight : MonoBehaviour {
     public GameObject player;
 
     bool cleansing;
-    float timer;
+    public float timer;
 	// Use this for initialization
 	void Start () {
         timer = 3f;
@@ -21,6 +21,8 @@ public class PlayerInSight : MonoBehaviour {
             if (this.gameObject.GetComponent<residentMovement>().currentState != "investigate")
             {
                 this.gameObject.GetComponent<residentMovement>().investigate(this.transform.position, () => { });
+                gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                gameObject.transform.GetChild(1).gameObject.SetActive(true);
             }
         }
         else
@@ -34,7 +36,8 @@ public class PlayerInSight : MonoBehaviour {
             {
                 Application.LoadLevel("GameOver");
             }
-
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
             cleansing = false;
         }
 
