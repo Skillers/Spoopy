@@ -44,26 +44,28 @@ public class Fearing : MonoBehaviour {
 
     public bool checkif1isin2(GameObject sourceObject, GameObject targetObject)
     {
-        Vector3 size = sourceObject.GetComponent<Collider>().bounds.size;
-        Vector3 position = sourceObject.GetComponent<Collider>().bounds.center;
-        Vector3 size2 = targetObject.GetComponent<Collider>().bounds.size;
-        Vector3 position2 = targetObject.GetComponent<Collider>().bounds.center;
-        if ((position.x + size.x/2f) < (position2.x + size2.x/2f) && (position.x - size.x / 2f) > (position2.x - size2.x / 2f))
+        if (sourceObject != null && targetObject != null)
         {
-           
-            if ((position.y + size.y/2f) < (position2.y + size2.y / 2f) && (position.y - size.y/2f) > (position2.y - size2.y / 2f))
+            Vector3 size = sourceObject.GetComponent<Collider>().bounds.size;
+            Vector3 position = sourceObject.GetComponent<Collider>().bounds.center;
+            Vector3 size2 = targetObject.GetComponent<Collider>().bounds.size;
+            Vector3 position2 = targetObject.GetComponent<Collider>().bounds.center;
+            if ((position.x + size.x / 2f) < (position2.x + size2.x / 2f) && (position.x - size.x / 2f) > (position2.x - size2.x / 2f))
             {
-               
-                if ((position.z + size.z / 2f) < (position2.z + size2.z / 2f) && (position.z - size.z / 2f) > (position2.z - size2.z/ 2f))
+
+                if ((position.y + size.y / 2f) < (position2.y + size2.y / 2f) && (position.y - size.y / 2f) > (position2.y - size2.y / 2f))
                 {
-                    return true;
+
+                    if ((position.z + size.z / 2f) < (position2.z + size2.z / 2f) && (position.z - size.z / 2f) > (position2.z - size2.z / 2f))
+                    {
+                        return true;
+                    }
                 }
+
             }
 
+
         }
-
-
-
         return false;
     }
 

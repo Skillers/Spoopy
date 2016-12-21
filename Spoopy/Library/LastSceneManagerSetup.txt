@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/CurrentBuild/Scenes/zombietestlvl.unity
-=======
-- path: Assets/Tim/Scenes/TimTest.unity
->>>>>>> Tim
+- path: Assets/CurrentBuild/Scenes/EasyLevel/EasyLevel.unity
   isLoaded: 1
   isActive: 1

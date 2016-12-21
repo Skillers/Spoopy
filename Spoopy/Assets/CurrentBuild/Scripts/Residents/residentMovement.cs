@@ -48,7 +48,9 @@ public class residentMovement : MonoBehaviour
     // Scare From Player
     public GameObject residentSanctuary;
     public GameObject ghost;
+    public GameObject killSpot;
 
+    public GameObject thisCharacter;
 
     // Room assignment variables
     [HideInInspector]
@@ -141,7 +143,7 @@ public class residentMovement : MonoBehaviour
 
         if (agent.remainingDistance <= 5)
         {
-            Debug.Log(callBack.Method.Name);
+            //Debug.Log(callBack.Method.Name);
             callBack();
         }
 
@@ -255,8 +257,12 @@ public class residentMovement : MonoBehaviour
     public void FleeFromHouse()
     {
         currentState = "GTFO";
-        agent.SetDestination(new Vector3(0, 0, -100));
+        agent.SetDestination(killSpot.transform.position);
         agent.speed = 12;
+        if(agent.remainingDistance <= agent.stoppingDistance)
+        {
+            thisCharacter.SetActive(false);
+        }
     }
 
 

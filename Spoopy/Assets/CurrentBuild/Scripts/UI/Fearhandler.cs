@@ -12,7 +12,7 @@ public class Fearhandler : MonoBehaviour {
     public int timerSecRound = 0;
     int timerSecRoundOld = 0;
     public Scrollbar scrollie;
-    bool winner = false;
+    public bool winner = false;
     public GameObject levelComplete;
 
     // Use this for initialization
@@ -27,7 +27,6 @@ public class Fearhandler : MonoBehaviour {
             if (fearCurrent >= fearMax)
             {
                 winner = true;
-                levelComplete.active = true;
 
             }
             if(fearCurrent >= decayNumber) { SteadyDecay(decayNumber); }
