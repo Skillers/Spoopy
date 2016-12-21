@@ -40,10 +40,9 @@ public class residentMovement : MonoBehaviour
 
 
     //Actions variables
-    private float actionTimer = 0f;
-    private float trappedTimer = 0f;
-    private float scareTimer = 0f;
-
+    private float actionTimer = 0f; // timer that counts action duration
+    private float scareTimer = 0f;  // timer counts time to stop hiding
+    private float destroyTimer = 0; // timer before making fleeing resident disappear
 
     // Scare From Player
     public GameObject residentSanctuary;
@@ -259,8 +258,10 @@ public class residentMovement : MonoBehaviour
         currentState = "GTFO";
         agent.SetDestination(killSpot.transform.position);
         agent.speed = 12;
-        if(agent.remainingDistance <= agent.stoppingDistance)
+        destroyTimer += Time.deltaTime;
+        if(agent.remainingDistance <= agent.stoppingDistance && destroyTimer >= 3)
         {
+            destroyTimer = 0f;
             thisCharacter.SetActive(false);
         }
     }
@@ -310,16 +311,6 @@ public class residentMovement : MonoBehaviour
 
     }
 
-
-    public void Trapped()
-    {
-        currentState = "trapped";
-        trappedTimer += Time.deltaTime;
-        if (trappedTimer > 10)
-        {
-            currentState = "roaming";
-        }
-    }
 }
 
 

@@ -21,7 +21,10 @@ public class BearTrapScript : MonoBehaviour {
             target.GetComponent<NavMeshAgent>().Stop();
             if (effectTimer >= effectDuration)
             {
-                target.GetComponent<NavMeshAgent>().Resume();
+                if (target != null)
+                {
+                    target.GetComponent<NavMeshAgent>().Resume();
+                }
                 Destroy(gameObject);
                 effectTimer = 0;
             }

@@ -104,4 +104,9 @@ public class Interaction : MonoBehaviour {
     {
         this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().activated = true;
     }
+
+    public void CandleInteraction()
+    {
+        this.GetComponentInParent<CandleOnandOff>().Check();
+    }
 }
