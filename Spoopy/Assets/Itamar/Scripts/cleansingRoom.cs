@@ -13,7 +13,7 @@ public class cleansingRoom : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+        eMove = eMove.GetComponent<ExorcistMovement>();
     }
 
     // Update is called once per frame

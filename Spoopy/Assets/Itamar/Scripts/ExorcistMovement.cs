@@ -4,7 +4,7 @@ using System.Collections;
 public class ExorcistMovement : MonoBehaviour {
 
     [HideInInspector]public GameObject[] currentRoomWPs;
-    public string currentRoom;
+    [HideInInspector]public string currentRoom;
     [HideInInspector]public string targetRoom;
 
     /* 
