@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/CurrentBuild/Scenes/zombietestlvl.unity
+=======
+- path: Assets/Tim/Scenes/TimTest.unity
+>>>>>>> Tim
   isLoaded: 1
   isActive: 1

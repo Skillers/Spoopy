@@ -75,11 +75,10 @@ public class Interaction : MonoBehaviour {
         }
     }
 
-    public void BookCaseInteraction()
+    public void BookcaseInteraction()
     {
-        this.GetComponent<BookCaseScript>().activated = true;
+        this.GetComponent<NewBookcaseScript>().activated = true;
         fearingOn = true;
-
     }
 
     public void WindowInteraction()

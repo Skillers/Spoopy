@@ -39,7 +39,6 @@ public class VaseScript : MonoBehaviour {
         if (!breakSound.isPlaying)
         {
             breakSound.Play();
-
         }
     }
 
