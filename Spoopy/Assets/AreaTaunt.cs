@@ -40,16 +40,17 @@ public class AreaTaunt : MonoBehaviour {
 
         if (residentThatNeedsToCloseMe != null)
         {
+            if (residentThatNeedsToCloseMe.GetComponent<residentMovement>().currentState != "investigate")
+            {
+                residentThatNeedsToCloseMe.GetComponent<residentMovement>().investigate(this.transform.position);
+            }
             if (residentThatNeedsToCloseMe.GetComponent<NavMeshAgent>().stoppingDistance + 0.5f >= Vector3.Distance(residentThatNeedsToCloseMe.transform.position, this.transform.position))
             {
                 TauntReady = false;
                 residentThatNeedsToCloseMe = null;
                 this.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<HandleWindow>().ResetWindowInteraction();
             }
-            if (residentThatNeedsToCloseMe.GetComponent<residentMovement>().currentState != "investigate")
-            {
-                residentThatNeedsToCloseMe.GetComponent<residentMovement>().investigate(this.transform.position);
-            }
+
         }
     }
 }

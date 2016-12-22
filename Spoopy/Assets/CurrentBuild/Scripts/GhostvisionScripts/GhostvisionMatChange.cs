@@ -5,7 +5,7 @@ public class GhostvisionMatChange : MonoBehaviour {
     public Material Mat1;
     public Material Mat2;
 
-    bool onOff = true;
+    bool onOff = false;
     public Renderer rend;
 
     void Start()
