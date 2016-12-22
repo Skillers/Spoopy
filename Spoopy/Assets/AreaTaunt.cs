@@ -2,47 +2,53 @@
 using System.Collections;
 
 public class AreaTaunt : MonoBehaviour {
-
+    public GameObject checkspace;
     public bool TauntReady = false;
+    public GameObject residentThatNeedsToCloseMe;
+
+
     //om dit te laten werken moet je eerst ergens deze callBack benoemen naar de resetmethode voor het gewenste object.
     public System.Action callBack;
-    
-    void OnTriggerEnter(Collider col)
+
+
+    void Start()
     {
-        if (col.gameObject.tag == "Resident")
-        {
-            if (TauntReady)
-            {
-                if (col.GetComponent<residentMovement>() != null)
-                {
-                    if (col.GetComponent<residentMovement>().currentState != "investigate")
-                    {
-                        if (callBack != null)
-                        {
-                            col.GetComponent<TauntAI>().TriggerInvestigate(this.transform.position, callBack);
-                        }
-                    }
-                }
-            }
-        }
+        checkspace = GameObject.Find("FearCollector");
     }
 
-    void OnTriggerStay(Collider col)
+
+    void FixedUpdate()
     {
-        if (col.gameObject.tag == "Resident")
-        {
-            if (TauntReady)
+        if (TauntReady)
+        {   
+            
+            foreach (GameObject resident in checkspace.GetComponent<Fearing>().residents)
             {
-                if (col.GetComponent<residentMovement>() != null)
+                if (residentThatNeedsToCloseMe == null)
                 {
-                    if (col.GetComponent<residentMovement>().currentState != "investigate")
+                    if (checkspace.GetComponent<Fearing>().checkif1isin2(resident, this.gameObject))
                     {
-                        if (callBack != null)
+                        if (resident.GetComponent<residentMovement>().currentState != "investigate")
                         {
-                            col.GetComponent<TauntAI>().TriggerInvestigate(this.transform.position, callBack);
+                            resident.GetComponent<residentMovement>().investigate(this.transform.position);
+                            residentThatNeedsToCloseMe = resident;
                         }
                     }
                 }
+            }        
+        }
+
+        if (residentThatNeedsToCloseMe != null)
+        {
+            if (residentThatNeedsToCloseMe.GetComponent<NavMeshAgent>().stoppingDistance + 0.5f >= Vector3.Distance(residentThatNeedsToCloseMe.transform.position, this.transform.position))
+            {
+                TauntReady = false;
+                residentThatNeedsToCloseMe = null;
+                this.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<HandleWindow>().ResetWindowInteraction();
+            }
+            if (residentThatNeedsToCloseMe.GetComponent<residentMovement>().currentState != "investigate")
+            {
+                residentThatNeedsToCloseMe.GetComponent<residentMovement>().investigate(this.transform.position);
             }
         }
     }

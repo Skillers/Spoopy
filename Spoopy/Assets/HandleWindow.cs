@@ -16,7 +16,7 @@ public class HandleWindow : MonoBehaviour {
         _areaTaunt.callBack = ResetWindowInteraction;
     }
 
-    private void ResetWindowInteraction()
+    public void ResetWindowInteraction()
     {
         if (!_windowAction.ready)
         {

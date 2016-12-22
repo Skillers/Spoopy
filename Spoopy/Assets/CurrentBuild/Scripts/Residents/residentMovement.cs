@@ -89,7 +89,7 @@ public class residentMovement : MonoBehaviour
         }
         if (currentState == "investigate")
         {
-            investigate(currentInvestigation, currentCallBack);
+            investigate(currentInvestigation);
         }
 
 
@@ -130,10 +130,10 @@ public class residentMovement : MonoBehaviour
 
 
     //Resident moves to designated location, spins round for few seconds, then continues roaming
-    public void investigate(Vector3 targetPosition, System.Action callBack)
+    public void investigate(Vector3 targetPosition)
     {
         currentInvestigation = targetPosition;
-        currentCallBack = callBack;
+       
         currentState = "investigate";
 
 
@@ -142,8 +142,7 @@ public class residentMovement : MonoBehaviour
 
         if (agent.remainingDistance <= 5)
         {
-            //Debug.Log(callBack.Method.Name);
-            callBack();
+            
         }
 
 

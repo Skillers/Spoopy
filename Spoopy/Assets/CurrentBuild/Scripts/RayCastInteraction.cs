@@ -9,7 +9,7 @@ public class RayCastInteraction : MonoBehaviour {
 
       
         highlights = GameObject.FindGameObjectsWithTag("Highlight");
-
+        Screen.lockCursor = true;
         Cursor.visible = false;
     }
 

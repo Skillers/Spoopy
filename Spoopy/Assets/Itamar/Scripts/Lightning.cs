@@ -31,7 +31,7 @@ public class Lightning : MonoBehaviour {
             strikeLength -= Time.deltaTime;
             if (strikeLength <= 0f)
             {
-                Debug.Log("meh");
+                
                 lStandard.GetComponent<Light>().intensity = 0f;
                 lightningOn = false;
                 strikeLength = previousStrikeLength;

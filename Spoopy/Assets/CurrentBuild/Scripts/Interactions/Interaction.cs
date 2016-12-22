@@ -9,20 +9,6 @@ public class Interaction : MonoBehaviour {
     public int fearamount = 1;
 
 
-    public void Taunt()
-    {
-        List<TauntAI> AI = GameObject.FindObjectsOfType<TauntAI>().ToList<TauntAI>();
-        foreach (TauntAI TAI in AI)
-        {
-            if (Vector3.Distance(this.transform.position, TAI.transform.position) <= 40.0f)
-            {
-                TAI.TriggerInvestigate(this.transform.position, () => { });
-            }
-        }
-    }
-
-
-
     // interaction method for each interaction
     public void SinkInteraction()
     {

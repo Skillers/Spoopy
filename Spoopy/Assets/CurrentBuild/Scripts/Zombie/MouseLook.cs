@@ -84,11 +84,13 @@ public class MouseLook
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
         }
         else if (!m_cursorIsLocked)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            
         }
     }
 

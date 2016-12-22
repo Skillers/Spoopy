@@ -20,7 +20,7 @@ public class PlayerInSight : MonoBehaviour {
             timer -= Time.deltaTime;
             if (this.gameObject.GetComponent<residentMovement>().currentState != "investigate")
             {
-                this.gameObject.GetComponent<residentMovement>().investigate(this.transform.position, () => { });
+                this.gameObject.GetComponent<residentMovement>().investigate(this.transform.position);
                 gameObject.transform.GetChild(0).gameObject.SetActive(true);
                 gameObject.transform.GetChild(1).gameObject.SetActive(true);
             }

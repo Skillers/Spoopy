@@ -24,14 +24,18 @@ public class Pauze : MonoBehaviour {
             Time.timeScale = 0;
             Menu.SetActive(true);
             AudioListener.pause = true;
+            
             Cursor.visible = true;
+          
         }
         else
         {
             Time.timeScale = 1;
             Menu.SetActive(false);
             AudioListener.pause = false;
+
             Cursor.visible = false;
+           
         }
 	}
 }
