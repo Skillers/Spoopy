@@ -12,6 +12,7 @@ public class waterTapScript : MonoBehaviour {
 
     public GameObject slimeStream;
     private Renderer myRenderer;
+    public float time;
 
     void Start ()
     {
@@ -24,6 +25,10 @@ public class waterTapScript : MonoBehaviour {
 	void Update ()
     {
         runTheTap(isTurnedOn);
+        if(time <= 0)
+        {
+            isTurnedOn = false;
+        }
 	}
 
 
@@ -33,13 +38,17 @@ public class waterTapScript : MonoBehaviour {
         if(state == false)
         {
             myRenderer.enabled = false;
+            time = this.GetComponent<Interaction>().SinkTime;
+            this.GetComponent<Interaction>().fearingOn = false;
 
         }
         if (state == true)
         {
             myRenderer.enabled = true;
-
+            
+            time -= Time.deltaTime;
         }
 
     }
+
 }

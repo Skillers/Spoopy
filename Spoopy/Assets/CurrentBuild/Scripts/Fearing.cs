@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Fearing : MonoBehaviour {
+public class Fearing : MonoBehaviour
+{
     public List<GameObject> residents = new List<GameObject>();
 
-    public List<GameObject>  interactions = new List<GameObject>();
+    public List<GameObject> interactions = new List<GameObject>();
 
     void Start()
     {
@@ -20,10 +21,9 @@ public class Fearing : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
-	void FixedUpdate () {
-
-
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         foreach (GameObject interaction in interactions)
         {
             foreach (GameObject resident in residents)
@@ -32,14 +32,31 @@ public class Fearing : MonoBehaviour {
                 {
                     if (interaction.GetComponent<Interaction>().fearingOn)
                     {
-                        resident.GetComponent<ResidentsFearBar>().fearBar.GetComponent<Fearhandler>().GetFearedBrother(interaction.GetComponent<Interaction>().fearamount);
+                        int fearScale = 1; int fearScaleLight = 1;
+                        #region Fear Scaling
+                        float dis = Vector3.Distance(resident.transform.position, interaction.transform.position);
+                        
+                        if(dis < 5)
+                        {
+                            fearScale = 3;
+                        }
+                        else if(dis < 10)
+                        {
+                            fearScale = 2;
+                        }
+                        else
+                        {
+                            fearScale = 1;
+                        }
+                        #endregion
+                        resident.GetComponent<ResidentsFearBar>().fearBar.GetComponent<Fearhandler>().GetFearedBrother(interaction.GetComponent<Interaction>().fearamount * fearScale);
                     }
                 }
-  
+
             }
         }
 
-     
+
     }
 
     public bool checkif1isin2(GameObject sourceObject, GameObject targetObject)

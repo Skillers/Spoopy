@@ -91,8 +91,7 @@ public class residentMovement : MonoBehaviour
         {
             investigate(currentInvestigation);
         }
-
-
+        
 
 
         if (currentState == "scared")
