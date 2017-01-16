@@ -90,6 +90,12 @@ public class Interaction : MonoBehaviour {
         fearingOn = true;
     }  
 
+    public void CarInteraction()
+    {
+        fearingOn = true;
+        this.GetComponentInParent<DriveCar>().Drive();
+    }
+
     // locking doors
     public void DoorLock()
     {
