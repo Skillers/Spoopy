@@ -26,7 +26,7 @@ public class PianoPlay : MonoBehaviour {
         }
         if(timer <= 0)
         {
-            this.transform.GetChild(0).GetComponent<Interaction>().fearingOn = false;
+            this.GetComponentInParent<Interaction>().fearingOn = false;
             pianoPlay.Stop();
             isPlaying = false;
         }
@@ -36,6 +36,6 @@ public class PianoPlay : MonoBehaviour {
     {
         isPlaying = true;
         timer = 7f;
-        Instantiate(soundIcon, transform.position + (transform.up * 2), transform.rotation);
+        Instantiate(soundIcon, transform.position + (transform.up * 2 + transform.forward* -2), transform.rotation);
     }
 }

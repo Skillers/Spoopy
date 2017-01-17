@@ -41,7 +41,7 @@ public class TVScript : MonoBehaviour {
         }
         if(timer <= 0)
         {
-            this.transform.GetChild(0).GetComponent<Interaction>().fearingOn = false;
+            this.GetComponentInParent<Interaction>().fearingOn = false;
             staticSound.Stop();
             myRenderer.enabled = false;
             isTurnedOn = false;

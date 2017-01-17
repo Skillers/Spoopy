@@ -32,7 +32,7 @@ public class waterTapScript : MonoBehaviour {
         }
         if (timer <= 0)
         {
-            this.transform.GetChild(0).GetComponent<Interaction>().fearingOn = false;
+            this.GetComponentInParent<Interaction>().fearingOn = false;
             myRenderer.enabled = false;
             isTurnedOn = false;
         }
