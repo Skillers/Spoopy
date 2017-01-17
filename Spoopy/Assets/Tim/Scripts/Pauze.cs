@@ -5,11 +5,13 @@ public class Pauze : MonoBehaviour {
 
     GameObject Menu;
     public bool paused;
+    //public GameObject gameTip;
 
 	// Use this for initialization
 	void Start () {
         Menu = transform.GetChild(0).gameObject;
         paused = false;
+        //gameTip = transform.GetChild(0).GetChild(5).GetChild(1).GetComponent<RandomTip>().NewTip();
 	}
 	
 	// Update is called once per frame
@@ -17,6 +19,7 @@ public class Pauze : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             paused = !paused;
+            transform.GetChild(0).GetChild(5).GetChild(1).GetComponent<RandomTip>().NewTip();
         }
 
         if (paused)

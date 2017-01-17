@@ -132,6 +132,11 @@ public class residentMovement : MonoBehaviour
     //Resident moves to designated location, spins round for few seconds, then continues roaming
     public void investigate(Vector3 targetPosition)
     {
+        if (this.tag == "Resident")
+        {
+            this.GetComponent<FacesScript>().ChangeFace("curious");
+        }
+
         currentInvestigation = targetPosition;
        
         currentState = "investigate";
@@ -157,6 +162,10 @@ public class residentMovement : MonoBehaviour
                 currentState = "roaming";
                 Roaming();
                 searchTimer = 0f;
+                if (this.tag == "Resident")
+                {
+                    this.GetComponent<FacesScript>().ChangeFace("startled");
+                }
             }
         }
     }
@@ -255,6 +264,11 @@ public class residentMovement : MonoBehaviour
     public void FleeFromHouse()
     {
         currentState = "GTFO";
+        if (this.tag == "Resident")
+        {
+            this.GetComponent<FacesScript>().ChangeFace("GTFO");
+        }
+
         agent.SetDestination(killSpot.transform.position);
         agent.speed = 12;
         destroyTimer += Time.deltaTime;

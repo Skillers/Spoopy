@@ -12,13 +12,15 @@ public class Interaction : MonoBehaviour {
     // interaction method for each interaction
     public void SinkInteraction()
     {
-        this.GetComponent<waterTapScript>().isTurnedOn = !this.GetComponent<waterTapScript>().isTurnedOn;
+        // this.GetComponent<waterTapScript>().isTurnedOn = !this.GetComponent<waterTapScript>().isTurnedOn;
+        this.GetComponentInParent<waterTapScript>().Play();
         fearingOn = !fearingOn;
     }
 
     public void TVInteraction()
     {
-        this.GetComponent<TVScript>().isTurnedOn = !this.GetComponent<TVScript>().isTurnedOn;
+        //this.GetComponent<TVScript>().isTurnedOn = !this.GetComponent<TVScript>().isTurnedOn;
+        this.GetComponentInParent<TVScript>().Play();
         fearingOn = !fearingOn;
     }
 
@@ -30,7 +32,8 @@ public class Interaction : MonoBehaviour {
 
     public void PianoInteraction()
     {
-        this.GetComponent<PianoPlay>().isPlaying = !this.GetComponent<PianoPlay>().isPlaying;
+   //     this.GetComponent<PianoPlay>().isPlaying = !this.GetComponent<PianoPlay>().isPlaying;
+        this.GetComponentInParent<PianoPlay>().Play();
         fearingOn = !fearingOn;
     }
 
@@ -84,6 +87,28 @@ public class Interaction : MonoBehaviour {
         this.GetComponentInParent<spiegelActive>().Break();
     }
 
+    public void SprinklerInteraction()
+    {
+        this.GetComponentInParent<SprinklerSprinkels>().Sprinkel();
+        fearingOn = true;
+    }  
+
+    public void CarInteraction()
+    {
+        fearingOn = true;
+        this.GetComponentInParent<DriveCar>().Drive();
+    }
+
+    public void LawnMowerInteraction()
+    {
+        fearingOn = true;
+        this.GetComponentInParent<LawnMowing>().MowingMower();
+    }
+
+    public void StatueInteraction()
+    {
+        this.GetComponent<StareDownResident>().StartStare();
+    }
 
     // locking doors
     public void DoorLock()

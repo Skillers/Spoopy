@@ -9,6 +9,9 @@ public class waterTapScript : MonoBehaviour {
     Stream part should have the animatedTiledTexture on it.
     */
     public bool isTurnedOn;
+    public float timer;
+
+    public GameObject soundIcon;
 
     public GameObject slimeStream;
     private Renderer myRenderer;
@@ -23,23 +26,24 @@ public class waterTapScript : MonoBehaviour {
 
 	void Update ()
     {
-        runTheTap(isTurnedOn);
-	}
-
-
-
-    public void runTheTap(bool state)
-    {
-        if(state == false)
+        if (isTurnedOn)
         {
+            timer -= Time.deltaTime;
+        }
+        if (timer <= 0)
+        {
+            this.GetComponentInParent<Interaction>().fearingOn = false;
             myRenderer.enabled = false;
-
+            isTurnedOn = false;
         }
-        if (state == true)
-        {
-            myRenderer.enabled = true;
+    }
 
-        }
 
+    public void Play()
+    {
+        isTurnedOn = true;
+        myRenderer.enabled = true;
+        timer = 5f;
+        Instantiate(soundIcon, transform.position + (transform.up * 3), transform.rotation * Quaternion.Euler(0, 90, 0));
     }
 }
