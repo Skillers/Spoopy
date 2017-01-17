@@ -8,7 +8,7 @@ public class ClockManager : MonoBehaviour
 {
     public GameObject timeWarning;
     public Text timeWarningNumber;
-
+    public AudioSource clock;
 
     private float
         hoursToDegrees= 360f / 12f,
@@ -21,6 +21,8 @@ public class ClockManager : MonoBehaviour
     float timerMilisec = 0;
     public float timerMilisecRound = 0 ;
     public Transform hours, minutes, seconds;
+
+    public int strikes;
    
     void Update()
     {       
@@ -41,7 +43,8 @@ public class ClockManager : MonoBehaviour
             seconds.localRotation = Quaternion.Euler(0f, 0f, (float)timerMilisecRound * -360);
         if (timerSecRound > 57 && timerMin != 5)
         {
-
+            strikes = (int) timerMin;
+            
             timeWarningNumber.text = "" + (int)(timerMin + 1);
             timeWarning.SetActive(true);
            
@@ -51,5 +54,10 @@ public class ClockManager : MonoBehaviour
             timeWarning.SetActive(false);
         }
 
+        if (!clock.isPlaying && strikes > 0)
+        {
+            strikes--;
+            clock.Play();
+        }
     }
 }
