@@ -102,6 +102,11 @@ public class Interaction : MonoBehaviour {
         this.GetComponentInParent<LawnMowing>().MowingMower();
     }
 
+    public void StatueInteraction()
+    {
+        this.GetComponent<StareDownResident>().StartStare();
+    }
+
     // locking doors
     public void DoorLock()
     {
