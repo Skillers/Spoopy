@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Rick/Scenes/easylevelRickStuff.unity
+- path: Assets/CurrentBuild/Scenes/EasyLevel/EasyLevel.unity
   isLoaded: 1
   isActive: 1
