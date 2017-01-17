@@ -3,6 +3,9 @@ using System.Collections;
 
 public class PianoPlay : MonoBehaviour {
     public bool isPlaying = false;
+    public float timer;
+
+    public GameObject soundIcon;
 
     public  AudioSource pianoPlay;
     // Use this for initialization
@@ -19,9 +22,20 @@ public class PianoPlay : MonoBehaviour {
             {
                 pianoPlay.Play();
             }
-        }else
-        {
-            pianoPlay.Stop();
+            timer -= Time.deltaTime;
         }
-	}
+        if(timer <= 0)
+        {
+            this.transform.GetChild(0).GetComponent<Interaction>().fearingOn = false;
+            pianoPlay.Stop();
+            isPlaying = false;
+        }
+    }
+
+    public void Play()
+    {
+        isPlaying = true;
+        timer = 7f;
+        Instantiate(soundIcon, transform.position + (transform.up * 2), transform.rotation);
+    }
 }

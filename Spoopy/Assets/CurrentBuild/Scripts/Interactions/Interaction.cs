@@ -12,13 +12,15 @@ public class Interaction : MonoBehaviour {
     // interaction method for each interaction
     public void SinkInteraction()
     {
-        this.GetComponent<waterTapScript>().isTurnedOn = !this.GetComponent<waterTapScript>().isTurnedOn;
+        // this.GetComponent<waterTapScript>().isTurnedOn = !this.GetComponent<waterTapScript>().isTurnedOn;
+        this.GetComponentInParent<waterTapScript>().Play();
         fearingOn = !fearingOn;
     }
 
     public void TVInteraction()
     {
-        this.GetComponent<TVScript>().isTurnedOn = !this.GetComponent<TVScript>().isTurnedOn;
+        //this.GetComponent<TVScript>().isTurnedOn = !this.GetComponent<TVScript>().isTurnedOn;
+        this.GetComponentInParent<TVScript>().Play();
         fearingOn = !fearingOn;
     }
 
@@ -30,7 +32,8 @@ public class Interaction : MonoBehaviour {
 
     public void PianoInteraction()
     {
-        this.GetComponent<PianoPlay>().isPlaying = !this.GetComponent<PianoPlay>().isPlaying;
+   //     this.GetComponent<PianoPlay>().isPlaying = !this.GetComponent<PianoPlay>().isPlaying;
+        this.GetComponentInParent<PianoPlay>().Play();
         fearingOn = !fearingOn;
     }
 

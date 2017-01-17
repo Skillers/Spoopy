@@ -10,6 +10,9 @@ public class TVScript : MonoBehaviour {
     StaticScreen should have the animatedTiledTexture on it.
     */
     public bool isTurnedOn;
+    public float timer;
+
+    public GameObject soundIcon;
 
     public GameObject staticScreen;
     private Renderer myRenderer;
@@ -27,27 +30,30 @@ public class TVScript : MonoBehaviour {
 
     void Update()
     {
-        TurnOnTv(isTurnedOn);
-    }
 
-
-
-    public void TurnOnTv(bool state)
-    {
-        if (state == false)
+        if (isTurnedOn)
         {
-            myRenderer.enabled = false;
-            staticSound.Pause();
-        }
-        if (state == true)
-        {
-            myRenderer.enabled = true;
             if (!staticSound.isPlaying)
             {
                 staticSound.Play();
             }
+            timer -= Time.deltaTime;
         }
+        if(timer <= 0)
+        {
+            this.transform.GetChild(0).GetComponent<Interaction>().fearingOn = false;
+            staticSound.Stop();
+            myRenderer.enabled = false;
+            isTurnedOn = false;
+        }
+    }
 
+    public void Play()
+    {
+        isTurnedOn = true;
+        myRenderer.enabled = true;
+        timer = 3f;
+        Instantiate(soundIcon, transform.position + (transform.up * 2), transform.rotation * Quaternion.Euler(0, 90, 0));
     }
 }
 

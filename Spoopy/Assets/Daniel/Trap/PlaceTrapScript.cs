@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlaceTrapScript : MonoBehaviour {
     public GameObject bearTrap;
     public GameObject player;
+
+    public Image trapOffIcon;
 
     private bool onCooldown;
 
@@ -22,6 +25,7 @@ public class PlaceTrapScript : MonoBehaviour {
             if (!onCooldown)
             {
                 Instantiate(bearTrap, player.transform.position + (player.transform.forward * 2), transform.rotation);
+                trapOffIcon.fillAmount = 1;
                 onCooldown = true;
             }
         }
