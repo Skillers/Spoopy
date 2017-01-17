@@ -6,10 +6,14 @@ public class HighlightHandler : MonoBehaviour {
     public Color valueC;
     public GameObject shadedObject;
     // Use this for initialization
+<<<<<<< HEAD
 
     
     void Awake() {
         shadedObject = this.gameObject;
+=======
+    void Start () {
+>>>>>>> Rick
         shadedObject.GetComponent<Renderer>().material.SetFloat("_Outline", value);
         shadedObject.GetComponent<Renderer>().material.SetColor("_OutlineColor", valueC);
     }

@@ -84,6 +84,28 @@ public class Interaction : MonoBehaviour {
         this.GetComponentInParent<spiegelActive>().Break();
     }
 
+    public void SprinklerInteraction()
+    {
+        this.GetComponentInParent<SprinklerSprinkels>().Sprinkel();
+        fearingOn = true;
+    }  
+
+    public void CarInteraction()
+    {
+        fearingOn = true;
+        this.GetComponentInParent<DriveCar>().Drive();
+    }
+
+    public void LawnMowerInteraction()
+    {
+        fearingOn = true;
+        this.GetComponentInParent<LawnMowing>().MowingMower();
+    }
+
+    public void StatueInteraction()
+    {
+        this.GetComponent<StareDownResident>().StartStare();
+    }
 
     // locking doors
     public void DoorLock()
