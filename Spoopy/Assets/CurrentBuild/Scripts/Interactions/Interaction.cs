@@ -120,4 +120,10 @@ public class Interaction : MonoBehaviour {
     {
         this.GetComponentInParent<CandleOnandOff>().Check();
     }
+
+    public void MailBoxInteraction()
+    {
+
+        this.GetComponentInChildren<MailBox>().Activate();
+    }
 }
