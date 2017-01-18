@@ -32,15 +32,15 @@ public class Fearing : MonoBehaviour
                 {
                     if (interaction.GetComponent<Interaction>().fearingOn)
                     {
-                        int fearScale = 1; int fearScaleLight = 1;
+                        float fearScale = 0.5f;
                         #region Fear Scaling
                         float dis = Vector3.Distance(resident.transform.position, interaction.transform.position);
                         
-                        if(dis < 5)
+                        if(dis < 3)
                         {
                             fearScale = 3;
                         }
-                        else if(dis < 10)
+                        else if(dis < 6)
                         {
                             fearScale = 2;
                         }
@@ -49,7 +49,7 @@ public class Fearing : MonoBehaviour
                             fearScale = 1;
                         }
                         #endregion
-                        resident.GetComponent<ResidentsFearBar>().fearBar.GetComponent<Fearhandler>().GetFearedBrother(interaction.GetComponent<Interaction>().fearamount * fearScale);
+                        resident.GetComponent<ResidentsFearBar>().fearBar.GetComponent<Fearhandler>().GetFearedBrother((int)(interaction.GetComponent<Interaction>().fearamount * fearScale));
                     }
                 }
 

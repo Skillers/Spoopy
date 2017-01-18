@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PianoPlay : MonoBehaviour {
     public bool isPlaying = false;
-    public float time;
 
     public  AudioSource pianoPlay;
     // Use this for initialization
@@ -20,17 +19,9 @@ public class PianoPlay : MonoBehaviour {
             {
                 pianoPlay.Play();
             }
-            time -= Time.deltaTime;
         }else
         {
             pianoPlay.Stop();
-            time = this.GetComponent<Interaction>().PianoTime;
-            this.GetComponent<Interaction>().fearingOn = false;
-        }
-
-        if(time <= 0)
-        {
-            isPlaying = false;
         }
 	}
 }

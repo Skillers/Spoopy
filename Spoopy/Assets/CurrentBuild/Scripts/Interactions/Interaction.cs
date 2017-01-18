@@ -6,9 +6,6 @@ using System.Linq;
 public class Interaction : MonoBehaviour {
 
     public bool fearingOn = false;
-    public int fearamount = 1, fearScale = 1;
-    public float SinkTime = 10, TVTime = 5, PianoTime = 15;
-
 
     // interaction method for each interaction
     public void SinkInteraction()
