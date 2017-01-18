@@ -19,11 +19,11 @@ public class CandleOnandOff : MonoBehaviour {
 
     public void Off()
     {
-        Lighting.gameObject.SetActive(false);
+       // Lighting.gameObject.SetActive(false);
     }
 
     public void On()
     {
-        Lighting.gameObject.SetActive(true);
+        //Lighting.gameObject.SetActive(true);
     }
 }
