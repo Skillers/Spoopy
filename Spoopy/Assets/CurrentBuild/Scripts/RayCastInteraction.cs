@@ -46,13 +46,13 @@ public class RayCastInteraction : MonoBehaviour {
                     hit.collider.gameObject.GetComponent<Interaction>().Invoke(temp,0);
                 }
 
-                if (Input.GetMouseButtonUp(1)) //lockingDoor
+                /*if (Input.GetMouseButtonUp(1)) //lockingDoor
                 {
                     
                         string temp = hit.collider.gameObject.name + "Lock";
                         hit.collider.gameObject.GetComponent<Interaction>().Invoke(temp, 0);
                    
-                }
+                }*/
 
             }
         }

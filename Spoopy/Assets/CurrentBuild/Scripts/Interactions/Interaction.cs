@@ -49,19 +49,15 @@ public class Interaction : MonoBehaviour {
         Debug.Log(this.transform.parent.transform.parent.transform.GetChild(0).name);
         if (this.transform.parent.transform.parent.transform.GetChild(0).name != "SingleDoor")
         {
-            if (!this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().locked)
-            {
                 this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open = !this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open;
                 this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().squeek();
-            }
+            
         }
         else
         {
-            if (!this.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().locked)
-            {
                 this.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open = !this.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().open;
                 this.transform.parent.transform.parent.transform.GetChild(0).GetComponent<DoorScript>().squeek();
-            }
+            
         }
     }
 
