@@ -9,17 +9,20 @@ public class VaseScript : MonoBehaviour {
     Rigidbody rb;
     [Range(0.0F, 2.0F)] public float strength = 1;
 
+    bool broken;
+
     // Use this for initialization
     void Start () {
         fearCollector = GameObject.Find("FearCollector");
         breakSound = GetComponent<AudioSource>();
         startHeight = this.transform.position.y;
         rb = GetComponent<Rigidbody>();
+        broken = false;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (this.transform.position.y < startHeight - 1 && rb.velocity.y >= -0.001)
+        if (this.transform.position.y < startHeight - 1 && rb.velocity.y >= -0.001 && !broken)
         {
             Break();
         }
@@ -40,13 +43,14 @@ public class VaseScript : MonoBehaviour {
         {
             breakSound.Play();
         }
+        broken = true;
     }
 
     public void Push()
     {
         if (!startedThePush)
         {
-            GetComponentInParent<Rigidbody>().AddForce(transform.TransformDirection(Vector3.forward) * (350 * strength));
+            GetComponentInParent<Rigidbody>().AddForce(transform.TransformDirection(Vector3.forward) * (200 * strength));
             startedThePush = true;
         }
     }

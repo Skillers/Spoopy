@@ -43,7 +43,7 @@ public class DoorScript : MonoBehaviour
             else if (!open && Door.localRotation.y < 0)
             {
                 Door.localEulerAngles = new Vector3(Door.localEulerAngles.x, 0f, Door.localEulerAngles.z);
-                locked = true;
+                Lock();
                 squeekSound.Stop();
             }
             if (open && Door.localRotation.y < 0.7)
@@ -67,7 +67,7 @@ public class DoorScript : MonoBehaviour
             {
                 LeftDoor.localEulerAngles = new Vector3(LeftDoor.localEulerAngles.x, 0f, LeftDoor.localEulerAngles.z);
                 RightDoor.localEulerAngles = new Vector3(RightDoor.localEulerAngles.x, 0f, RightDoor.localEulerAngles.z);
-                locked = true;
+                Lock();
                 squeekSound.Stop();
             }
             if (open && LeftDoor.localRotation.y < 0.7)
@@ -93,5 +93,18 @@ public class DoorScript : MonoBehaviour
     public void squeek()
     {
         squeekSound.Play();
+    }
+
+    public void Lock()
+    {
+        for (int i = 0; i < transform.parent.parent.childCount; i++)
+        {
+            if (transform.parent.parent.GetChild(i).name.Contains("DoorInteraction") && transform.parent.parent.GetChild(i).GetChild(0).GetComponent<DoorScript>().locked) {
+                transform.parent.parent.GetChild(i).GetChild(0).GetComponent<DoorScript>().open = true;
+            }
+        }
+        locked = true;
+
+
     }
 }
