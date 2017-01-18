@@ -8,8 +8,6 @@ public class DoorScript : MonoBehaviour
     Transform Door;
     Transform LeftDoor;
     Transform RightDoor;
-    public GameObject Handle;
-    public GameObject Handle2;
 
     NavMeshObstacle obstacle;
     public bool locked;
@@ -95,26 +93,5 @@ public class DoorScript : MonoBehaviour
     public void squeek()
     {
         squeekSound.Play();
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(1, 1, 0, 0.75F);
-        if (open)
-        {
-            Gizmos.DrawRay(Handle.transform.position, (Handle.transform.TransformDirection(Handle.transform.forward) * -2));
-            if (this.transform.name == "DoubleDoor")
-            {
-                Gizmos.DrawRay(Handle2.transform.position, (Handle2.transform.TransformDirection(Handle2.transform.forward) * -2));
-            }
-        }
-        else
-        {
-            Gizmos.DrawRay(Handle.transform.position, (Handle.transform.TransformDirection(Handle.transform.forward) * 2));
-            if (this.transform.name == "DoubleDoor")
-            {
-                Gizmos.DrawRay(Handle2.transform.position, (Handle2.transform.TransformDirection(Handle2.transform.forward) * 2));
-            }
-        }
     }
 }
