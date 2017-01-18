@@ -86,6 +86,7 @@ public class Interaction : MonoBehaviour {
     public void SpiegelInteraction()
     {
         this.GetComponentInParent<spiegelActive>().Break();
+        fearingOn = true;
     }
 
     public void SprinklerInteraction()
