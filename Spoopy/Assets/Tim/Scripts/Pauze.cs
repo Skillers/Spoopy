@@ -29,6 +29,7 @@ public class Pauze : MonoBehaviour {
             AudioListener.pause = true;
             
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
           
         }
         else

@@ -7,8 +7,13 @@ public class Fearing : MonoBehaviour {
 
     public List<GameObject>  interactions = new List<GameObject>();
 
+    public GameObject LevelComplete;
+
+    bool win;
+
     void Start()
     {
+        win = false;
 
         foreach (GameObject item in GameObject.FindGameObjectsWithTag("Resident"))
         {
@@ -39,7 +44,21 @@ public class Fearing : MonoBehaviour {
             }
         }
 
-     
+        win = true;
+        foreach (GameObject resident in residents)
+        {
+            if (resident.GetComponent<ResidentsFearBar>().fearBar.GetComponent<Fearhandler>().fearCurrent >= resident.GetComponent<ResidentsFearBar>().fearBar.GetComponent<Fearhandler>().fearMax && win)
+            {
+                win = true;
+            }
+            else { win = false; }
+
+        }
+        if (win == true)
+        {
+            LevelComplete.SetActive(true);
+        }
+
     }
 
     public bool checkif1isin2(GameObject sourceObject, GameObject targetObject)
