@@ -12,8 +12,7 @@ public class DoorScript : MonoBehaviour
     NavMeshObstacle obstacle;
     public bool locked;
     public bool activated;
-
-    // Use this for initialization
+    
     void Start()
     {
         open = true;
@@ -30,8 +29,7 @@ public class DoorScript : MonoBehaviour
         obstacle = GetComponent<NavMeshObstacle>();
         locked = false;
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         if (this.transform.name == "SingleDoor")
@@ -86,7 +84,7 @@ public class DoorScript : MonoBehaviour
             {
                 locked = false;
             }
-            obstacle.enabled = locked;
+            obstacle.enabled = locked; // Makes it an obstacle for residents if locked.
         }
     }
 
@@ -97,6 +95,7 @@ public class DoorScript : MonoBehaviour
 
     public void Lock()
     {
+        // Unlocks all doors then afterwards only locks this particular doors.
         for (int i = 0; i < transform.parent.parent.childCount; i++)
         {
             if (transform.parent.parent.GetChild(i).name.Contains("DoorInteraction") && transform.parent.parent.GetChild(i).GetChild(0).GetComponent<DoorScript>().locked) {
