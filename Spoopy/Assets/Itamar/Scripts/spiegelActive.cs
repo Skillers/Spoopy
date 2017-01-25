@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class spiegelActive : MonoBehaviour {
-
+    //shards the mirror
 
     public GameObject fearCollector;
 
@@ -11,12 +11,13 @@ public class spiegelActive : MonoBehaviour {
 
     void start()
     {
-
+        //fear for the mirror
         fearCollector = GameObject.Find("FearCollector");
         time = 0;
         timer = false;
     }
 
+    //fearing itself and the removing of the mirror
     public void FixedUpdate()
     {
         if (timer)
@@ -30,6 +31,8 @@ public class spiegelActive : MonoBehaviour {
         }
 
     }
+    //the breaking part of the mirror
+    //simply by disabling the normal mirror and activating the model shards
     public void Break()
     {
         transform.FindChild("SpiegelShards").gameObject.SetActive(true);
