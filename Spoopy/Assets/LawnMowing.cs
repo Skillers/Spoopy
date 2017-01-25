@@ -10,7 +10,7 @@ public class LawnMowing : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () { // the mowing movement. rotation is in MoveWithinEdges.cs
         if (mowing)
         {
             timer -= Time.deltaTime;
@@ -23,7 +23,7 @@ public class LawnMowing : MonoBehaviour {
             this.GetComponent<Interaction>().fearingOn = false;
         }
     }
-    public void MowingMower()
+    public void MowingMower() // method to trigger the lawn mower
     {
         mowing = true;
         timer = 10f;

@@ -16,7 +16,7 @@ public class StareDownResident : MonoBehaviour
 
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmos() //  to understand how far the reach of the stare down is there is a sphere drawn at all times. 
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, targetRange);
@@ -29,6 +29,7 @@ public class StareDownResident : MonoBehaviour
 
     void FixedUpdate()
     {
+        // staring is active it searches for the closest enemy that is withing range and fears that enemy for atleast one tick.
         if (staring)
         {
             timer -= Time.deltaTime;
@@ -36,7 +37,7 @@ public class StareDownResident : MonoBehaviour
             if (FearCollector.GetComponent<Fearing>().residents.Count != 0)
             {
                 currentTarget = null;
-                foreach (GameObject resident in FearCollector.GetComponent<Fearing>().residents)
+                foreach (GameObject resident in FearCollector.GetComponent<Fearing>().residents) 
                 {
 
                     if (distanceToEnemy > Vector3.Distance(resident.transform.position, this.transform.position))
@@ -55,6 +56,7 @@ public class StareDownResident : MonoBehaviour
         {
             currentTarget = null;
         }
+
         if(timer <= 0)
         {
             staring = false;
@@ -65,19 +67,19 @@ public class StareDownResident : MonoBehaviour
         {
             currentTarget.GetComponent<ResidentsFearBar>().fearBar.GetComponent<Fearhandler>().GetFearedBrother(this.GetComponent<Interaction>().fearamount);
             Vector3 heading = currentTarget.transform.position - this.transform.position;
-            heading.y = 0f;                                                            // since you want to point to the center of the object not the top.  
+            heading.y = 0f;                                                            // since you want to rotate the head realistic and not having a weird angle.
             Quaternion direction = Quaternion.LookRotation(heading);
             this.transform.rotation = direction;
 
         }
         else
         {
-            this.transform.rotation = new Quaternion(0, 0, 0, 0);
+            this.transform.rotation = new Quaternion(0, 0, 0, 0); // stops facing anyone
         }
 
     }
 
-    public void StartStare() {
+    public void StartStare() { // method to trigger the staring
         staring = true;
         timer = 10f;
     }

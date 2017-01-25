@@ -11,6 +11,7 @@ public class DriveCar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // drives  the car around a object for a amount of time.
         if (drivingCar) {
 
             timer -= Time.deltaTime;
@@ -24,7 +25,7 @@ public class DriveCar : MonoBehaviour {
         }
 	}
 
-    public void Drive() {
+    public void Drive() { // triggers driving car.
         drivingCar = true;
         timer = 5f;
     }

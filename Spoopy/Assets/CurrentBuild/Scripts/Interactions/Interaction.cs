@@ -10,16 +10,17 @@ public class Interaction : MonoBehaviour {
 
 
     // interaction method for each interaction
+    // just add the name of the interaction (the object that has the an activation script and this script) followed by interaction to the list below to use the interaction.
     public void SinkInteraction()
     {
-        // this.GetComponent<waterTapScript>().isTurnedOn = !this.GetComponent<waterTapScript>().isTurnedOn;
+        
         this.GetComponentInParent<waterTapScript>().Play();
         fearingOn = !fearingOn;
     }
 
     public void TVInteraction()
     {
-        //this.GetComponent<TVScript>().isTurnedOn = !this.GetComponent<TVScript>().isTurnedOn;
+       
         this.GetComponentInParent<TVScript>().Play();
         fearingOn = !fearingOn;
     }
@@ -32,7 +33,6 @@ public class Interaction : MonoBehaviour {
 
     public void PianoInteraction()
     {
-   //     this.GetComponent<PianoPlay>().isPlaying = !this.GetComponent<PianoPlay>().isPlaying;
         this.GetComponentInParent<PianoPlay>().Play();
         fearingOn = !fearingOn;
     }
@@ -114,8 +114,10 @@ public class Interaction : MonoBehaviour {
         this.transform.parent.transform.parent.transform.parent.transform.GetChild(0).GetComponent<LockDoor>().activated = true;
     }
 
+    // old candle activation still being called sometimes so it stays to avoid errors.
+    
     public void CandleInteraction()
-    {
-        this.GetComponentInParent<CandleOnandOff>().Check();
+    { 
+       
     }
 }

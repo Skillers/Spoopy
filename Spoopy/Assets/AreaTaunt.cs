@@ -18,7 +18,9 @@ public class AreaTaunt : MonoBehaviour {
 
 
     void FixedUpdate()
-    {
+    {   // checks if the window is done with its opening behavior.
+        // then assigns a resident in the nearbyarea to close it.  
+        // uses investigate from residentmovement.
         if (TauntReady)
         {   
             
@@ -37,7 +39,7 @@ public class AreaTaunt : MonoBehaviour {
                 }
             }        
         }
-
+       
         if (residentThatNeedsToCloseMe != null)
         {
             if (residentThatNeedsToCloseMe.GetComponent<residentMovement>().currentState != "investigate")

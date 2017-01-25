@@ -52,7 +52,7 @@ public class chandelierCrash : MonoBehaviour {
             Break();
         }
     }
-	// Update is called once per frame
+
 
     bool IsGrounded()
     {

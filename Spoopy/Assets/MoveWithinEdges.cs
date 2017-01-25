@@ -12,8 +12,8 @@ public class MoveWithinEdges : MonoBehaviour {
 
     }
 	
-	// Update is called once per frame
-	void Update () {
+	
+	void Update () { // Rotates and moves the lawn mower towards the center if it gets out of bounds 
         if (!checkif1isin2(LawnMover, this.gameObject) && LawnMover.GetComponent<LawnMowing>().mowing)
         {
             heading = this.GetComponent<Collider>().bounds.center - LawnMover.transform.position;
@@ -24,7 +24,7 @@ public class MoveWithinEdges : MonoBehaviour {
         }
     }
 
-    public bool checkif1isin2(GameObject sourceObject, GameObject targetObject)
+    public bool checkif1isin2(GameObject sourceObject, GameObject targetObject) // altered method from fear collector.
     {
         if (sourceObject != null && targetObject != null)
         {

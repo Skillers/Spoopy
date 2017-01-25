@@ -14,6 +14,7 @@ public class SprinklerSprinkels : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        // as long as there is time the sprinkler spits out a ball every several ticks and rotates.
 	if(sprinkling)
         {
             timertwo--;
@@ -33,7 +34,7 @@ public class SprinklerSprinkels : MonoBehaviour {
         }
 	}
 
-    public void Sprinkel()
+    public void Sprinkel() // triggers sprinkler
     {
         sprinkling = true;
         timer = 5f;

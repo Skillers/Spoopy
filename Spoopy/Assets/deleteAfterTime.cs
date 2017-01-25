@@ -8,8 +8,8 @@ public class deleteAfterTime : MonoBehaviour {
 	    FinalTimer = 1f;
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	
+	void Update () { // water dissapears after 1sec.
         FinalTimer -= Time.deltaTime;
         if(FinalTimer <= 0)
         {
