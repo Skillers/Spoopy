@@ -3,20 +3,22 @@ using System.Collections;
 
 public class BearTrapScript : MonoBehaviour {
     private float effectTimer;
+    // Duration of the Traps Stopping effect
     public float effectDuration = 5;
-
+    // particles that will play when trap is triggered
     public ParticleSystem particles;
-
+    //The Resident triggering the effect assigned in OntriggerEnter
     GameObject target;
+    // Used to check if trap has been activated
     private bool triggered;
-	// Use this for initialization
+
 	void Start () {
         effectTimer = 0;
         triggered = false;
         particles.Pause();
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
         if (triggered)
         {

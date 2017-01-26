@@ -4,6 +4,9 @@ using System.Collections;
 
 public class FacesScript : MonoBehaviour {
 
+    /* Sprites for the different faces can be added here.
+     Use:   this.GetComponent<FacesScript>().ChangeFace("curious"); for example to change sprite
+    */
     public Image faceImage;
     public Sprite gTFO;
     public Sprite curious;
